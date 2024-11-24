@@ -2,8 +2,10 @@ package km.algorithms;
 
 import km.model.Node;
 import km.model.TSPProblem;
+import km.model.structures.Stack;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DFS extends Algorithm {
     private final TSPProblem problem;
@@ -29,13 +31,13 @@ public class DFS extends Algorithm {
                 if (totalDistance < bestDistance) {
                     bestDistance = totalDistance;
                     bestPath = new ArrayList<>(current.path);
-                    bestPath.add(0); // Zamknięcie cyklu
+                    bestPath.add(0);
                 }
             } else {
                 for (int nextCity = 0; nextCity < citiesCount; nextCity++) {
                     if (!current.path.contains(nextCity)) {
                         int nextCost = current.cost + problem.getDistance(current.city, nextCity);
-                        if (nextCost < bestDistance) { // Pruning
+                        if (nextCost < bestDistance) {
                             List<Integer> nextPath = new ArrayList<>(current.path);
                             nextPath.add(nextCity);
                             stack.push(new Node(nextCity, nextPath, nextCost));
