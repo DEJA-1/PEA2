@@ -124,15 +124,15 @@ public class Main {
         po każdym wywołaniu oraz zapisujemy rezultat do pliku
     */
     public static long runAlgorithm(String algorithmName, Algorithm algorithm, CSVWriter csvWriter, int[][] matrix, ProgressIndicator progressIndicator, TSPProblem problem, boolean showProgress, int iteration) throws IOException {
-//        Display.printIterationSeparator(algorithmName, iteration, showProgress, progressIndicator.getProgress());
+        Display.printIterationSeparator(algorithmName, iteration, showProgress, progressIndicator.getProgress());
 
         List<Integer> solution = algorithm.solve();
         int totalDistance = calculateTotalDistance(solution, problem);
         long timeNano = TimeMeasurer.measureAlgorithmTime(algorithm);
 
-//        Display.displayRoute(solution);
-//        Display.displayDistance(totalDistance);
-//        Display.displayExecutionTime(timeNano);
+        Display.displayRoute(solution);
+        Display.displayDistance(totalDistance);
+        Display.displayExecutionTime(timeNano);
 
         csvWriter.writeRecord(matrix.length, matrix, algorithmName, timeNano, timeNano / 1_000_000);
         progressIndicator.updateProgress();
